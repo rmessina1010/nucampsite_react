@@ -1,44 +1,47 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class CampsiteInfo extends Component {
 
-    renderCampsite(campsite) {
 
-        return (
-            <div className="col-md-5 m-1">
-                <Card>
-                    <CardImg top src={campsite.image} alt={campsite.name} />
-                    <CardBody>
-                        <CardTitle>{campsite.name}</CardTitle>
-                        <CardText>{campsite.description}</CardText>
-                    </CardBody>
-                </Card>
-            </div>);
-    }
+function RenderCampsite({ campsite }) {
+    return (
+        <div className="col-md-5 m-1">
+            <Card>
+                <CardImg top src={campsite.image} alt={campsite.name} />
+                <CardBody>
+                    <CardTitle>{campsite.name}</CardTitle>
+                    <CardText>{campsite.description}</CardText>
+                </CardBody>
+            </Card>
+        </div>);
+}
 
-    renderComments(comments) {
-        return comments ?
-            <div className="col-md-5 m-1">
-                <h4>Comments</h4>
-                {comments.map((comment) => {
-                    return (
-                        <p>
-                            {comment.text}<br />
+function RenderComments({ comments }) {
+    return comments ?
+        <div className="col-md-5 m-1">
+            <h4>Comments</h4>
+            {comments.map((comment) => {
+                return (
+                    <p>
+                        {comment.text}<br />
                              --{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}
-                        </p>
-                    )
-                }
-                )}
+                    </p>
+                )
+            }
+            )}
 
-            </div>
-            : <div />
+        </div>
+        : <div />
 
-    }
-
-    render() {
-        return (this.props.campsite) ? (<div className="container"><div className="row" >{this.renderCampsite(this.props.campsite)} {this.renderComments(this.props.campsite.comments)}</div></div>) : (<div />);
-    }
+}
+function CampsiteInfo(props) {
+    return props.campsite ? (<div className="container">
+        <div className="row" >
+            <RenderCampsite campsite={props.campsite} />
+            <RenderComments comments={props.campsite.comments} />
+        </div>
+    </div>)
+        : (<div />);
 }
 
 
