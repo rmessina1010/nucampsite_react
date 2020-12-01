@@ -61,8 +61,7 @@ class Contact extends Component {
         return errors;
     }
 
-    handleBlur = (event) => {
-        const field = event.target.name;
+    handleBlur = (field) => () => {
         this.setState({
             touched: { ...this.state.touched, [field]: true }
         });
@@ -132,8 +131,8 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         value={this.state.firstName}
                                         invalid={errors.firstName}
-                                        onChange={this.handleInputChange}
-                                        onBlur={this.handleBlur} />
+                                        onBlur={this.handleBlur("firstName")}
+                                        onChange={this.handleInputChange} />
                                     <FormFeedback>{errors.firstName}</FormFeedback>
                                 </Col>
                             </FormGroup>
@@ -144,8 +143,8 @@ class Contact extends Component {
                                         placeholder="Last Name"
                                         value={this.state.lastName}
                                         invalid={errors.lastName}
-                                        onChange={this.handleInputChange}
-                                        onBlur={this.handleBlur} />
+                                        onBlur={this.handleBlur("lastName")}
+                                        onChange={this.handleInputChange} />
                                     <FormFeedback>{errors.lastName}</FormFeedback>
                                 </Col>
                             </FormGroup>
@@ -156,8 +155,8 @@ class Contact extends Component {
                                         placeholder="Phone number"
                                         value={this.state.phoneNum}
                                         invalid={errors.phoneNum}
-                                        onChange={this.handleInputChange}
-                                        onBlur={this.handleBlur} />
+                                        onBlur={this.handleBlur("phoneNum")}
+                                        onChange={this.handleInputChange} />
                                     <FormFeedback>{errors.phoneNum}</FormFeedback>
                                 </Col>
                             </FormGroup>
@@ -168,8 +167,8 @@ class Contact extends Component {
                                         placeholder="Email"
                                         value={this.state.email}
                                         invalid={errors.email}
-                                        onChange={this.handleInputChange}
-                                        onBlur={this.handleBlur} />
+                                        onBlur={this.handleBlur("email")}
+                                        onChange={this.handleInputChange} />
                                     <FormFeedback>{errors.email}</FormFeedback>
                                 </Col>
                             </FormGroup>
