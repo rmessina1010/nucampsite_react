@@ -3,6 +3,8 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form'
 
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import { postComment, fetchCampsites, fetchComments, fetchPromotions } from '../redux/ActionCreators';
 
 import Header from './HeaderComponent';
@@ -71,15 +73,19 @@ class Main extends Component {
         return (
             <div>
                 <Header />
-                <Switch>
-                    <Route path="/home" component={HomePage} />
-                    <Route exact path="/directory" render={() => <Directory campsites={this.props.campsites} />} />
-                    <Route exact path="/aboutus" render={() => <About partners={this.props.partners} />} />
-                    <Route exact path="/directory/:campsiteId" component={CampsiteWithId} />
-                    <Route exact path='/contactus' render={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
-                    <Redirect to="/home" />
-                    <CampsiteInfo campsite={this.props.campsites.campsites.filter(campsite => campsite.id === this.props.selectedCampsite)[0]} />
-                </Switch>
+                <TransitionGroup>
+                    <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                        <Switch>
+                            <Route path="/home" component={HomePage} />
+                            <Route exact path="/directory" render={() => <Directory campsites={this.props.campsites} />} />
+                            <Route exact path="/aboutus" render={() => <About partners={this.props.partners} />} />
+                            <Route exact path="/directory/:campsiteId" component={CampsiteWithId} />
+                            <Route exact path='/contactus' render={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                            <Redirect to="/home" />
+                            <CampsiteInfo campsite={this.props.campsites.campsites.filter(campsite => campsite.id === this.props.selectedCampsite)[0]} />
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
                 <Footer />
             </div >
         );
