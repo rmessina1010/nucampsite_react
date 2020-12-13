@@ -1,18 +1,16 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { FadeTransform } from 'react-animation-components';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import { Loading } from './LoadingComponent';
 
 import { baseUrl } from '../shared/baseUrl';
-import { Partners } from '../redux/partners';
-
 
 
 function RenderPartner({ partner }) {
     if (partner) {
         return (
-            <React.Fragment>
+            <React.Fragment id={partner.id}>
                 <Media object src={baseUrl + partner.image} alt={partner.name} width="150" />
                 <Media body className="ml-5 mb-4">
                     <Media heading>{partner.name}
@@ -94,11 +92,14 @@ function About(props) {
 
 function PartnerList(props) {
 
+
     const partners = props.partners.partners.map(partner => {
         return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
-            </Media>
+            <Fade in key={partner.id}>
+                <Media tag="li">
+                    <RenderPartner partner={partner} />
+                </Media>
+            </Fade>
         );
     });
 
@@ -124,9 +125,7 @@ function PartnerList(props) {
         );
     }
     return (
-        <div>
-            {partners}
-        </div>
+        <Stagger in>{partners}</Stagger>
     );
 }
 export default About;
