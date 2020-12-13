@@ -4,6 +4,7 @@ import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } 
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
+import { FadeTransform } from 'react-animation-components';
 
 function RenderDirectoryItem({ campsite }) {
     return (
@@ -51,10 +52,12 @@ function Directory(props) {
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Directory</BreadcrumbItem>
-                    </Breadcrumb>
+                    <FadeTransform in transformProps={{ exitTransform: 'translateX(100%)' }} >
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>Directory</BreadcrumbItem>
+                        </Breadcrumb>
+                    </FadeTransform>
                     <h2>Directory</h2>
                     <hr />
                 </div>

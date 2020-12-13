@@ -81,11 +81,14 @@ function CampsiteInfo(props) {
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to="/directory">Directory</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{props.campsite.name}</BreadcrumbItem>
-                    </Breadcrumb>
+                    <FadeTransform in transformProps={{ exitTransform: 'translateX(100%)' }} >
+
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                            <BreadcrumbItem><Link to="/directory">Directory</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.campsite.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                    </FadeTransform>
                     <h2>{props.campsite.name}</h2>
                     <hr />
                 </div>

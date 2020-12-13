@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
 import { Control, Errors, Form } from 'react-redux-form'
 
+import { FadeTransform } from 'react-animation-components';
+
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
@@ -44,10 +46,12 @@ class Contact extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <Breadcrumb>
-                            <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
-                        </Breadcrumb>
+                        <FadeTransform in transformProps={{ exitTransform: 'translateX(100%)' }} >
+                            <Breadcrumb>
+                                <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                                <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+                            </Breadcrumb>
+                        </FadeTransform>
                         <h2>Contact Us</h2>
                         <hr />
                     </div>
